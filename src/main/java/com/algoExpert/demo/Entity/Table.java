@@ -4,14 +4,16 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
+//@Entity
 public class Table {
-    @Id
-    @GeneratedValue
-    private int table_id;
-    private String table_name;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private int table_id;
+//    private String table_name;
 
-    @OneToMany
-    List<Task> tasks;
+
+
+    //    @OneToMany
+//    List<Task> tasks;
 
 }
