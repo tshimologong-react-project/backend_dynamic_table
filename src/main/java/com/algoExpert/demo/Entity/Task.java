@@ -14,7 +14,7 @@ public class Task {
     private int task_id;
     private String title;
     private String description;
-    private  String Owner;
+    private String owner;
     private String start_date;
     private String end_date;
     private String status;
@@ -33,7 +33,7 @@ public class Task {
                 List<Integer> col_width) {
         this.title = title;
         this.description = description;
-        Owner = owner;
+        this.owner = owner;
         this.start_date = start_date;
         this.end_date = end_date;
         this.status = status;
@@ -60,11 +60,11 @@ public class Task {
     }
 
     public String getOwner() {
-        return Owner;
+        return owner;
     }
 
     public void setOwner(String owner) {
-        Owner = owner;
+        this.owner = owner;
     }
 
     public String getStart_date() {
