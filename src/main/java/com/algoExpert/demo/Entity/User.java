@@ -25,7 +25,7 @@ public class User {
   @OneToMany
      private List<Task> tasks;
 
-  @OneToMany
+     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
      private List<Comment> comments;
 
 //  constructors
