@@ -25,7 +25,7 @@ public class TaskController {
         return taskService.getAllTask();
     }
 
-    @PostMapping("/createProject/{project_id)}")
+    @PostMapping("/createTask/{project_id}")
     public Project createTable(@PathVariable Integer project_id){
         return taskService.createTable(project_id);
     }
