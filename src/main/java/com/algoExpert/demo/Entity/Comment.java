@@ -1,18 +1,18 @@
 package com.algoExpert.demo.Entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
-import java.util.List;
-
+@Entity
 public class Comment {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int comment_id;
     private String username;
     private String date_created;
+
+    @Column(length = 1000)
     private String comment;
 
 //    constructors
@@ -25,9 +25,24 @@ public class Comment {
         this.username = username;
         this.date_created = date_created;
         this.comment = comment;
+
     }
 
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "user_id")
+    private User user;
+
 //    getters and setters
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getComment_id() {
         return comment_id;
