@@ -27,7 +27,6 @@ public class Task {
 
     public Task(int task_id, String title, String description, String owner,
                 String start_date, String end_date, String status, String priority, List<Comment> comments) {
-                String start_date, String end_date, String status, String priority, List<Comment> comments) {
         this.task_id = task_id;
         this.title = title;
         this.description = description;
