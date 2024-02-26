@@ -5,17 +5,18 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@jakarta.persistence.Table(name = "task_table")
 public class Table {
 
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     private int table_id;
     private String table_name;
 
 //    relationships
     @OneToMany
-    List<Task> tasks;
+List<Task> tasks;
 //  constructors
 
 
