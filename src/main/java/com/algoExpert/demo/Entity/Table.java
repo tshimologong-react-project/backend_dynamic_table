@@ -18,7 +18,6 @@ public class Table {
     List<Task> tasks;
 //  constructors
 
-
     public Table() {
     }
 
