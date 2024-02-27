@@ -15,11 +15,10 @@ public class Project {
     private String title;
     private String description;
 
-    /*
+
     //    relationships
-    @OneToMany
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "project")
     private List<Table> tables;
-*/
 
 
     @ManyToMany
@@ -35,10 +34,11 @@ public class Project {
 //    constructors
 
 
-    public Project(Integer project_id, String title, String description, List<User> user) {
+    public Project(Integer project_id, String title, String description, List<Table> tables, List<User> user) {
         this.project_id = project_id;
         this.title = title;
         this.description = description;
+        this.tables = tables;
         this.user = user;
     }
 
@@ -64,6 +64,14 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Table> getTables() {
+        return tables;
+    }
+
+    public void setTables(List<Table> tables) {
+        this.tables = tables;
     }
 
     public List<User> getUser() {
