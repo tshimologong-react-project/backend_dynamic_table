@@ -1,5 +1,6 @@
 package com.algoExpert.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,15 +19,25 @@ public class Task {
     private String priority;
 
 //    relationships
-    @OneToMany
+   /* @OneToMany
     List<Comment> comments;
-
+*/
+@JsonIgnore
+@ManyToOne
+private Table table;
+@JsonIgnore
+@ManyToMany
+@JoinTable(
+        name = "user_task",
+        joinColumns =  @JoinColumn(name = "task_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+)
+private List<User> user;
 //    constructors
     public Task() {
     }
 
-    public Task(int task_id, String title, String description, String owner,
-                String start_date, String end_date, String status, String priority, List<Comment> comments) {
+    public Task(int task_id, String title, String description, String owner, String start_date, String end_date, String status, String priority, Table table, List<User> user) {
         this.task_id = task_id;
         this.title = title;
         this.description = description;
@@ -35,10 +46,9 @@ public class Task {
         this.end_date = end_date;
         this.status = status;
         this.priority = priority;
-        this.comments = comments;
+        this.table = table;
+        this.user = user;
     }
-
-    // getters and setters
 
     public int getTask_id() {
         return task_id;
@@ -104,13 +114,19 @@ public class Task {
         this.priority = priority;
     }
 
-
-
-    public List<Comment> getComments() {
-        return comments;
+    public Table getTable() {
+        return table;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void setTable(Table table) {
+        this.table = table;
+    }
+
+    public List<User> getUser() {
+        return user;
+    }
+
+    public void setUser(List<User> user) {
+        this.user = user;
     }
 }
