@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 public class Project {
@@ -14,28 +15,32 @@ public class Project {
     private String title;
     private String description;
 
+    /*
     //    relationships
     @OneToMany
     private List<Table> tables;
-
-    @JsonIgnore
-    @ManyToOne @JoinColumn(name = "user_id")
-    private  User user;
+*/
 
 
-    //    constructors
+    @ManyToMany
+    @JoinTable(
+            name = "user_project",
+            joinColumns =  @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> user;
+
     public Project() {
     }
+//    constructors
 
-    public Project(Integer project_id, String title, String description, List<Table> tables, User user) {
+
+    public Project(Integer project_id, String title, String description, List<User> user) {
         this.project_id = project_id;
         this.title = title;
         this.description = description;
-        this.tables = tables;
         this.user = user;
     }
-
-// getters and setters
 
     public Integer getProject_id() {
         return project_id;
@@ -61,19 +66,12 @@ public class Project {
         this.description = description;
     }
 
-    public List<Table> getTables() {
-        return tables;
-    }
-
-    public void setTables(List<Table> tables) {
-        this.tables = tables;
-    }
-
-    public User getUser() {
+    public List<User> getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(List<User> user) {
         this.user = user;
     }
 }
+

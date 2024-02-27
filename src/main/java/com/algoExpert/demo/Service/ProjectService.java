@@ -7,7 +7,9 @@ import com.algoExpert.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectService {
@@ -23,7 +25,9 @@ public class ProjectService {
     public Project createProject(Project project,Integer user_id)
     {
         User user=userRepository.findById(user_id).get();
-        project.setUser(user);
+        List<User> newUser = new ArrayList<>();
+        newUser.add(user);
+        project.setUser(newUser);
 
         return projectRepository.save(project);
     }

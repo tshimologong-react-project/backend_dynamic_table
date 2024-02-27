@@ -2,6 +2,7 @@
 package com.algoExpert.demo.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,34 +17,29 @@ public class User {
  private String email;
 
  // relationships
-@OneToMany(
-        mappedBy = "user",
-        cascade = CascadeType.ALL
-)
- private List<Project> projects;
 
- @OneToMany
- private List<Task> tasks;
+ /*
+  @OneToMany
+  private List<Task> tasks;
 
- @OneToMany
- private List<Comment> comments;
+  @OneToMany
+  private List<Comment> comments;
 
-//  constructors
+ //  constructors
+ */
+ @JsonIgnore
+@ManyToMany( mappedBy = "user", cascade = CascadeType.ALL)
+private List<Project> projects;
 
  public User() {
  }
 
- public User(Integer user_id, String username, String email,
-             List<Project> projects, List<Task> tasks, List<Comment> comments) {
+ public User(Integer user_id, String username, String email, List<Project> projects) {
   this.user_id = user_id;
   this.username = username;
   this.email = email;
   this.projects = projects;
-  this.tasks = tasks;
-  this.comments = comments;
  }
-
-//     getters and setters
 
  public Integer getUser_id() {
   return user_id;
@@ -76,23 +72,5 @@ public class User {
  public void setProjects(List<Project> projects) {
   this.projects = projects;
  }
-
- public List<Task> getTasks() {
-  return tasks;
- }
-
- public void setTasks(List<Task> tasks) {
-  this.tasks = tasks;
- }
-
- public List<Comment> getComments() {
-  return comments;
- }
-
- public void setComments(List<Comment> comments) {
-  this.comments = comments;
- }
-
-
 }
 
