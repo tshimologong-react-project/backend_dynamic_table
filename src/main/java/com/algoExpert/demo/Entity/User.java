@@ -31,14 +31,17 @@ public class User {
 @ManyToMany( mappedBy = "user", cascade = CascadeType.ALL)
 private List<Project> projects;
 
+ @ManyToMany( mappedBy = "user", cascade = CascadeType.ALL)
+ private List<Task> tasks;
  public User() {
  }
 
- public User(Integer user_id, String username, String email, List<Project> projects) {
+ public User(Integer user_id, String username, String email, List<Project> projects, List<Task> tasks) {
   this.user_id = user_id;
   this.username = username;
   this.email = email;
   this.projects = projects;
+  this.tasks = tasks;
  }
 
  public Integer getUser_id() {
@@ -71,6 +74,14 @@ private List<Project> projects;
 
  public void setProjects(List<Project> projects) {
   this.projects = projects;
+ }
+
+ public List<Task> getTasks() {
+  return tasks;
+ }
+
+ public void setTasks(List<Task> tasks) {
+  this.tasks = tasks;
  }
 }
 
