@@ -33,10 +33,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public List<Comment> userComments(int userId){
-        User findUser = userRepository.findById(userId).orElseThrow();
-        return findUser.getComments();
-    }
+//    public List<Comment> userComments(int userId){
+//        User findUser = userRepository.findById(userId).orElseThrow();
+//        return findUser.getComments();
+//    }
 
     public List<User> deleteUser(int userId){
         userRepository.deleteById(userId);
