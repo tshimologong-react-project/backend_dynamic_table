@@ -1,6 +1,7 @@
 package com.algoExpert.demo.Controller;
 
 import com.algoExpert.demo.Entity.Comment;
+import com.algoExpert.demo.Entity.Task;
 import com.algoExpert.demo.Entity.User;
 import com.algoExpert.demo.Service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,9 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @PostMapping("/create/{userId}")
-    private Comment createComment(@PathVariable int userId, @RequestBody Comment comment){
-        return commentService.createComment(userId,comment);
+    @PostMapping("/create/{userId}/{taskId}")
+    private Task createComment(@PathVariable int userId, @RequestBody Comment comment, @PathVariable int taskId){
+        return commentService.createComment(userId,comment,taskId);
     }
 
     @GetMapping("/all")
