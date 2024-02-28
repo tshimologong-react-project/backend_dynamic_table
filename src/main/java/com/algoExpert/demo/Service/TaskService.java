@@ -25,8 +25,8 @@ public class TaskService {
     public Project createTable(Integer id){
          Project project =  projectRepository.findById(id).get();
          List<Table> tables = project.getTables();
-        Table table =new Table(0,"New Table",project,null);
-        Task task=new Task(0,"","","","","","","",table,null);
+         Table table =new Table(0,"New Table",project,null);
+         Task task=new Task(0,"","","","","","","",null,table,null);
 
          tables.add(table);
          project.setTables(tables);

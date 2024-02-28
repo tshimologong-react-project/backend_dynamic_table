@@ -19,9 +19,9 @@ public class Task {
     private String priority;
 
 //    relationships
-   /* @OneToMany
-    List<Comment> comments;
-*/
+   @OneToMany(cascade = CascadeType.ALL)
+   List<Comment> comments;
+
 @JsonIgnore
 @ManyToOne
 private Table table;
@@ -37,7 +37,7 @@ private List<User> user;
     public Task() {
     }
 
-    public Task(int task_id, String title, String description, String owner, String start_date, String end_date, String status, String priority, Table table, List<User> user) {
+    public Task(int task_id, String title, String description, String owner, String start_date, String end_date, String status, String priority, List<Comment> comments, Table table, List<User> user) {
         this.task_id = task_id;
         this.title = title;
         this.description = description;
@@ -46,6 +46,7 @@ private List<User> user;
         this.end_date = end_date;
         this.status = status;
         this.priority = priority;
+        this.comments = comments;
         this.table = table;
         this.user = user;
     }
@@ -112,6 +113,14 @@ private List<User> user;
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public Table getTable() {

@@ -21,6 +21,7 @@ public class Project {
     private List<Table> tables;
 
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "user_project",
