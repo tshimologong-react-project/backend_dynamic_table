@@ -15,33 +15,27 @@ public class Comment {
     @Column(length = 1000)
     private String comment;
 
-//    constructors
-
-    public Comment() {
-    }
-
-    public Comment(int comment_id, String username, String date_created, String comment) {
-        this.comment_id = comment_id;
-        this.username = username;
-        this.date_created = date_created;
-        this.comment = comment;
-
-    }
-
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "user_id")
     private User user;
 
-//    getters and setters
+    @ManyToOne
+    @JsonIgnore
+    private Task task;
 
+//    constructors
 
-    public User getUser() {
-        return user;
+    public Comment() {
     }
 
-    public void setUser(User user) {
+    public Comment(int comment_id, String username, String date_created, String comment, User user, Task task) {
+        this.comment_id = comment_id;
+        this.username = username;
+        this.date_created = date_created;
+        this.comment = comment;
         this.user = user;
+        this.task = task;
     }
 
     public int getComment_id() {
@@ -74,5 +68,21 @@ public class Comment {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
     }
 }
