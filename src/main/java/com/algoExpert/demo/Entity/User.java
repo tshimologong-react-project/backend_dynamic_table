@@ -2,6 +2,7 @@
 package com.algoExpert.demo.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,34 +17,32 @@ public class User {
  private String email;
 
  // relationships
-@OneToMany(
-        mappedBy = "user",
-        cascade = CascadeType.ALL
-)
- private List<Project> projects;
 
- @OneToMany
+ /*
+  @OneToMany
+  private List<Task> tasks;
+*/
+  @OneToMany(cascade = CascadeType.ALL)
+  private List<Comment> comments;
+
+ //  constructors
+
+@ManyToMany( mappedBy = "user", cascade = CascadeType.ALL)
+private List<Project> projects;
+
+ @ManyToMany( mappedBy = "user", cascade = CascadeType.ALL)
  private List<Task> tasks;
-
- @OneToMany
- private List<Comment> comments;
-
-//  constructors
-
  public User() {
  }
 
- public User(Integer user_id, String username, String email,
-             List<Project> projects, List<Task> tasks, List<Comment> comments) {
+ public User(Integer user_id, String username, String email, List<Comment> comments, List<Project> projects, List<Task> tasks) {
   this.user_id = user_id;
   this.username = username;
   this.email = email;
+  this.comments = comments;
   this.projects = projects;
   this.tasks = tasks;
-  this.comments = comments;
  }
-
-//     getters and setters
 
  public Integer getUser_id() {
   return user_id;
@@ -69,6 +68,14 @@ public class User {
   this.email = email;
  }
 
+ public List<Comment> getComments() {
+  return comments;
+ }
+
+ public void setComments(List<Comment> comments) {
+  this.comments = comments;
+ }
+
  public List<Project> getProjects() {
   return projects;
  }
@@ -84,15 +91,5 @@ public class User {
  public void setTasks(List<Task> tasks) {
   this.tasks = tasks;
  }
-
- public List<Comment> getComments() {
-  return comments;
- }
-
- public void setComments(List<Comment> comments) {
-  this.comments = comments;
- }
-
-
 }
 

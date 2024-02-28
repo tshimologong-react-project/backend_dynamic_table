@@ -1,8 +1,10 @@
 package com.algoExpert.demo.Service;
 
 import com.algoExpert.demo.Entity.Comment;
+import com.algoExpert.demo.Entity.Task;
 import com.algoExpert.demo.Entity.User;
 import com.algoExpert.demo.Repository.CommentRepository;
+import com.algoExpert.demo.Repository.TaskRepository;
 import com.algoExpert.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,11 @@ public class CommentService {
     @Autowired
     private UserRepository userRepository ;
 
-    public Comment createComment(int userId,Comment comment){
+    @Autowired
+    private TaskRepository taskRepository;
+
+    public Task createComment(int userId,Comment comment, int taskId){
+
 
         User findUser =  userRepository.findById(userId).get();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
@@ -29,7 +35,13 @@ public class CommentService {
 
         comment.setUsername(findUser.getUsername());
         comment.setUser(findUser);
-        return commentRepository.save(comment);
+        Task task = taskRepository.findById(taskId).get();
+        List<Comment> commentList = task.getComments();
+        commentList.add(comment);
+
+        task.setComments(commentList);
+
+        return taskRepository.save(task);
 
     }
 

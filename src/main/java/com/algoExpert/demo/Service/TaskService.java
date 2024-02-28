@@ -1,9 +1,6 @@
 package com.algoExpert.demo.Service;
 
-import com.algoExpert.demo.Entity.Comment;
-import com.algoExpert.demo.Entity.Project;
-import com.algoExpert.demo.Entity.Table;
-import com.algoExpert.demo.Entity.Task;
+import com.algoExpert.demo.Entity.*;
 import com.algoExpert.demo.Repository.ProjectRepository;
 import com.algoExpert.demo.Repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +24,18 @@ public class TaskService {
 
     public Project createTable(Integer id){
          Project project =  projectRepository.findById(id).get();
-         List<Table>  storedTable =   project.getTables();
+         List<Table> tables = project.getTables();
+         Table table =new Table(0,"New Table",project,null);
+         Task task=new Task(0,"","","","","","","",null,table,null);
 
-         List<Comment> comment = new ArrayList<>();
+         tables.add(table);
+         project.setTables(tables);
+         List<Task> taskList=new ArrayList<>();
+         taskList.add(task);
+         table.setTasks(taskList);
 
-         Task firstTask = new Task( 0, "","","","","","","",comment);
-
-         List<Task> tasks = new ArrayList<>();
-         tasks.add(firstTask);
-         tasks.add(firstTask);
-
-         Table tables = new Table(0,"New table",tasks);
-         storedTable.add(tables);
-
-         project.setTables(storedTable);
 
          return projectRepository.save(project);
-    }
+   }
 }
 
