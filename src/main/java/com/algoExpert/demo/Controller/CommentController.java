@@ -17,7 +17,7 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping("/create/{userId}/{taskId}")
-    private Task createComment(@PathVariable int userId, @RequestBody Comment comment, @PathVariable int taskId){
+    private User createComment(@PathVariable int userId, @RequestBody Comment comment, @PathVariable int taskId){
         return commentService.createComment(userId,comment,taskId);
     }
 
