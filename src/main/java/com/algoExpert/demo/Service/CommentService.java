@@ -26,7 +26,7 @@ public class CommentService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public Task createComment(int userId,Comment comment, int taskId){
+    public User createComment(int userId,Comment comment, int taskId){
 
 
         User findUser =  userRepository.findById(userId).get();
@@ -34,14 +34,20 @@ public class CommentService {
         comment.setDate_created(simpleDateFormat.format(new Date()));
 
         comment.setUsername(findUser.getUsername());
-        comment.setUser(findUser);
+        
         Task task = taskRepository.findById(taskId).get();
-        List<Comment> commentList = task.getComments();
-        commentList.add(comment);
+        List<Comment> commentTask = task.getComments();
+        List<Comment> commentUser=findUser.getComments();
+        commentTask.add(comment);
+        commentUser.add(comment);
+        findUser.setComments(commentUser);
 
-        task.setComments(commentList);
+        task.setComments(commentTask);
 
-        return taskRepository.save(task);
+        taskRepository.save(task);
+
+
+        return userRepository.save(findUser);
 
     }
 
