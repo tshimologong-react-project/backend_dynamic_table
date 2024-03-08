@@ -17,29 +17,25 @@ public class Project {
 
 
     //    relationships
-    @OneToMany( cascade = CascadeType.ALL, mappedBy = "project")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Table> tables;
 
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-            name = "user_project",
-            joinColumns =  @JoinColumn(name = "project_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> user;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Members> membersList;
+
+    @ManyToOne
+    private User user;
 
     public Project() {
     }
-//    constructors
 
-
-    public Project(Integer project_id, String title, String description, List<Table> tables, List<User> user) {
+    public Project(Integer project_id, String title, String description, List<Table> tables, List<Members> membersList, User user) {
         this.project_id = project_id;
         this.title = title;
         this.description = description;
         this.tables = tables;
+        this.membersList = membersList;
         this.user = user;
     }
 
@@ -75,12 +71,19 @@ public class Project {
         this.tables = tables;
     }
 
-    public List<User> getUser() {
+    public List<Members> getMembersList() {
+        return membersList;
+    }
+
+    public void setMembersList(List<Members> membersList) {
+        this.membersList = membersList;
+    }
+
+    public User getUser() {
         return user;
     }
 
-    public void setUser(List<User> user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }
-
