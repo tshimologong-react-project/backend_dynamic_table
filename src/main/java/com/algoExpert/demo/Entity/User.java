@@ -27,21 +27,26 @@ public class User {
 
  //  constructors
 
-@ManyToMany( mappedBy = "user", cascade = CascadeType.ALL)
+@OneToMany( cascade = CascadeType.ALL)
 private List<Project> projects;
 
- @ManyToMany( mappedBy = "user", cascade = CascadeType.ALL)
- private List<Task> tasks;
+// @ManyToMany( mappedBy = "user", cascade = CascadeType.ALL)
+// private List<Task> tasks;
+
+ @OneToMany(cascade = CascadeType.ALL)
+ private List<Members> membersList;
+
+
  public User() {
  }
 
- public User(Integer user_id, String username, String email, List<Comment> comments, List<Project> projects, List<Task> tasks) {
+ public User(Integer user_id, String username, String email, List<Comment> comments, List<Project> projects, List<Members> membersList) {
   this.user_id = user_id;
   this.username = username;
   this.email = email;
   this.comments = comments;
   this.projects = projects;
-  this.tasks = tasks;
+  this.membersList = membersList;
  }
 
  public Integer getUser_id() {
@@ -84,12 +89,12 @@ private List<Project> projects;
   this.projects = projects;
  }
 
- public List<Task> getTasks() {
-  return tasks;
+ public List<Members> getMembersList() {
+  return membersList;
  }
 
- public void setTasks(List<Task> tasks) {
-  this.tasks = tasks;
+ public void setMembersList(List<Members> membersList) {
+  this.membersList = membersList;
  }
 }
 

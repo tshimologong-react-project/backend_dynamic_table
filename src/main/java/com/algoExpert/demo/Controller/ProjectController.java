@@ -1,5 +1,6 @@
 package com.algoExpert.demo.Controller;
 
+import com.algoExpert.demo.Entity.Members;
 import com.algoExpert.demo.Entity.Project;
 import com.algoExpert.demo.Service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class ProjectController {
 
 
     @PostMapping("/createProject/{user_id}")
-    public Project create(@RequestBody Project project,@PathVariable Integer user_id){
+    public Project create(@RequestBody Project project, @PathVariable Integer user_id){
         return projectService.createProject(project,user_id);
     }
 

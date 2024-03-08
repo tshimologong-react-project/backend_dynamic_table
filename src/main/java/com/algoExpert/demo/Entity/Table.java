@@ -18,24 +18,18 @@ public class Table {
 //    relationships
 
 //  constructors
-        @JsonIgnore
-        @ManyToOne
-    private Project project;
 
-    @OneToMany( cascade = CascadeType.ALL , mappedBy = "table")
+
+    @OneToMany( cascade = CascadeType.ALL )
     List<Task> tasks;
 
     public Table() {
     }
 
-    public Table(int table_id, String table_name, Project project, List<Task> tasks) {
+    public Table(int table_id, String table_name, List<Task> tasks) {
         this.table_id = table_id;
         this.table_name = table_name;
-        this.project = project;
         this.tasks = tasks;
-    }
-
-    public Table(int i, String newTable, List<Task> tasks) {
     }
 
     public int getTable_id() {
@@ -52,14 +46,6 @@ public class Table {
 
     public void setTable_name(String table_name) {
         this.table_name = table_name;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
     }
 
     public List<Task> getTasks() {
