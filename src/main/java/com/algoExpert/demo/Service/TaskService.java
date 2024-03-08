@@ -15,6 +15,9 @@ public class TaskService {
      @Autowired
      private ProjectRepository projectRepository;
 
+     @Autowired
+     private AssigneesRepository assigneesRepository;
+
 
 
 //    public Task addTask(Task task){
@@ -26,13 +29,15 @@ public class TaskService {
 //
 
 
-    public Project createTable(Integer id,int member_id){
-         Project project =  projectRepository.findById(id).get();
+
+
+    public Project createTable(Integer project_id,int member_id){
+         Project project =  projectRepository.findById(project_id).get();
 
          List<Table> tables = project.getTables();
          Table table =new Table(0,"New Table",null);
          Task task=new Task(0,"",""
-                 ,member_id,"","","","",null);
+                 ,member_id,"","","","",null,null);
 
 
          tables.add(table);
@@ -44,7 +49,6 @@ public class TaskService {
 
          return projectRepository.save(project);
    }
-
 
 }
 
