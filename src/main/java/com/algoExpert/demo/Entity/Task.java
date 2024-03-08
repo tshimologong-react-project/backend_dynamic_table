@@ -12,7 +12,7 @@ public class Task {
     private int task_id;
     private String title;
     private String description;
-    private String owner;
+    private int owner;
     private String start_date;
     private String end_date;
     private String status;
@@ -22,22 +22,13 @@ public class Task {
    @OneToMany(cascade = CascadeType.ALL)
    List<Comment> comments;
 
-@JsonIgnore
-@ManyToOne
-private Table table;
-@JsonIgnore
-@ManyToMany
-@JoinTable(
-        name = "user_task",
-        joinColumns =  @JoinColumn(name = "task_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id")
-)
-private List<User> user;
-//    constructors
+
+
+
     public Task() {
     }
 
-    public Task(int task_id, String title, String description, String owner, String start_date, String end_date, String status, String priority, List<Comment> comments, Table table, List<User> user) {
+    public Task(int task_id, String title, String description, int owner, String start_date, String end_date, String status, String priority, List<Comment> comments) {
         this.task_id = task_id;
         this.title = title;
         this.description = description;
@@ -47,8 +38,6 @@ private List<User> user;
         this.status = status;
         this.priority = priority;
         this.comments = comments;
-        this.table = table;
-        this.user = user;
     }
 
     public int getTask_id() {
@@ -75,11 +64,11 @@ private List<User> user;
         this.description = description;
     }
 
-    public String getOwner() {
+    public int getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(int owner) {
         this.owner = owner;
     }
 
@@ -121,21 +110,5 @@ private List<User> user;
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
-    }
-
-    public Table getTable() {
-        return table;
-    }
-
-    public void setTable(Table table) {
-        this.table = table;
-    }
-
-    public List<User> getUser() {
-        return user;
-    }
-
-    public void setUser(List<User> user) {
-        this.user = user;
     }
 }
