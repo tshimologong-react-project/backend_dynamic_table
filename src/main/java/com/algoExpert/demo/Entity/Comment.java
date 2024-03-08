@@ -15,10 +15,10 @@ public class Comment {
     @Column(length = 1000)
     private String comment;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "user_id")
-    private User user;
+    // @ManyToOne
+    // @JsonIgnore
+    // @JoinColumn(name = "user_id")
+    // private User user;
 
     @ManyToOne
     @JsonIgnore
@@ -29,17 +29,18 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(int comment_id, String username, String date_created, String comment, User user, Task task) {
+    public Comment(int comment_id, String username, String date_created, String comment, Task task) {
         this.comment_id = comment_id;
         this.username = username;
         this.date_created = date_created;
         this.comment = comment;
-        this.user = user;
         this.task = task;
     }
+    
+
 
     public int getComment_id() {
-        return comment_id;
+        return this.comment_id;
     }
 
     public void setComment_id(int comment_id) {
@@ -47,7 +48,7 @@ public class Comment {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
@@ -55,7 +56,7 @@ public class Comment {
     }
 
     public String getDate_created() {
-        return date_created;
+        return this.date_created;
     }
 
     public void setDate_created(String date_created) {
@@ -63,26 +64,19 @@ public class Comment {
     }
 
     public String getComment() {
-        return comment;
+        return this.comment;
     }
 
     public void setComment(String comment) {
         this.comment = comment;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Task getTask() {
-        return task;
+        return this.task;
     }
 
     public void setTask(Task task) {
         this.task = task;
     }
+    
 }
