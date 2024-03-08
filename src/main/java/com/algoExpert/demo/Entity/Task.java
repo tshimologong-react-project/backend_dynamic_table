@@ -23,12 +23,14 @@ public class Task {
    List<Comment> comments;
 
 
+   @OneToMany(cascade = CascadeType.ALL)
+   List<Assignees>  assignees;
 
 
     public Task() {
     }
 
-    public Task(int task_id, String title, String description, int owner, String start_date, String end_date, String status, String priority, List<Comment> comments) {
+    public Task(int task_id, String title, String description, int owner, String start_date, String end_date, String status, String priority, List<Comment> comments, List<Assignees> assignees) {
         this.task_id = task_id;
         this.title = title;
         this.description = description;
@@ -38,6 +40,7 @@ public class Task {
         this.status = status;
         this.priority = priority;
         this.comments = comments;
+        this.assignees = assignees;
     }
 
     public int getTask_id() {
@@ -110,5 +113,13 @@ public class Task {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<Assignees> getAssignees() {
+        return assignees;
+    }
+
+    public void setAssignees(List<Assignees> assignees) {
+        this.assignees = assignees;
     }
 }
