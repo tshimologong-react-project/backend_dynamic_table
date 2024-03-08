@@ -17,57 +17,51 @@ import java.util.Optional;
 
 @Service
 public class CommentService {
-
-    @Autowired
-    private CommentRepository commentRepository;
-    @Autowired
-    private UserRepository userRepository ;
-
-    @Autowired
-    private TaskRepository taskRepository;
-
-    public User createComment(int userId,Comment comment, int taskId){
-
-
-        User findUser =  userRepository.findById(userId).get();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
-        comment.setDate_created(simpleDateFormat.format(new Date()));
-
-        comment.setUsername(findUser.getUsername());
-        
-        Task task = taskRepository.findById(taskId).get();
-        List<Comment> commentTask = task.getComments();
-        List<Comment> commentUser=findUser.getComments();
-        commentTask.add(comment);
-        commentUser.add(comment);
-        findUser.setComments(commentUser);
-
-        task.setComments(commentTask);
-
-        taskRepository.save(task);
-
-
-        return userRepository.save(findUser);
-
-    }
-
-    public List<Comment> getAllComments(){
-        return commentRepository.findAll();
-    }
-
-    public Comment editComment(int commentId,Comment newComment){
-        return commentRepository.findById(commentId)
-                .map(oldComment -> {oldComment.setComment(newComment.getComment());
-                return commentRepository.save(oldComment);}).orElseThrow();
-    }
-
-    public List<Comment> deleteComment(int commentId){
-        Comment findComment = commentRepository.findById(commentId).orElseThrow(()->new IllegalArgumentException("comment with Id "+commentId+" does not exist"));
-        if(findComment !=null){
-            commentRepository.deleteById(commentId);
-            return commentRepository.findAll();
-        }
-
-        return null;
-    }
+//
+//    @Autowired
+//    private CommentRepository commentRepository;
+//    @Autowired
+//    private UserRepository userRepository ;
+//
+//    @Autowired
+//    private TaskRepository taskRepository;
+//
+//    public Task createComment(int userId,Comment comment, int taskId){
+//
+//
+//        User findUser =  userRepository.findById(userId).get();
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
+//        comment.setDate_created(simpleDateFormat.format(new Date()));
+//
+//        comment.setUsername(findUser.getUsername());
+//        comment.setUser(findUser);
+//        Task task = taskRepository.findById(taskId).get();
+//        List<Comment> commentList = task.getComments();
+//        commentList.add(comment);
+//
+//        task.setComments(commentList);
+//
+//        return taskRepository.save(task);
+//
+//    }
+//
+//    public List<Comment> getAllComments(){
+//        return commentRepository.findAll();
+//    }
+//
+//    public Comment editComment(int commentId,Comment newComment){
+//        return commentRepository.findById(commentId)
+//                .map(oldComment -> {oldComment.setComment(newComment.getComment());
+//                return commentRepository.save(oldComment);}).orElseThrow();
+//    }
+//
+//    public List<Comment> deleteComment(int commentId){
+//        Comment findComment = commentRepository.findById(commentId).orElseThrow(()->new IllegalArgumentException("comment with Id "+commentId+" does not exist"));
+//        if(findComment !=null){
+//            commentRepository.deleteById(commentId);
+//            return commentRepository.findAll();
+//        }
+//
+//        return null;
+//    }
 }
