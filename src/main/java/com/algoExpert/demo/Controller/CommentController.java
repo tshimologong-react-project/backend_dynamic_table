@@ -13,18 +13,18 @@ import java.util.List;
 @RequestMapping("/comment")
 public class CommentController {
 
-//    @Autowired
-//    private CommentService commentService;
+    @Autowired
+    private CommentService commentService;
 //
 //    @PostMapping("/create/{userId}/{taskId}")
 //    private Task createComment(@PathVariable int userId, @RequestBody Comment comment, @PathVariable int taskId){
 //        return commentService.createComment(userId,comment,taskId);
 //    }
 //
-//    @GetMapping("/all")
-//    private List<Comment> getUsers(){
-//        return commentService.getAllComments();
-//    }
+    @GetMapping("/all")
+    private List<Comment> getUsers(){
+        return commentService.getAllComments();
+    }
 //
 //    @PutMapping("/edit/{commentId}")
 //    private Comment editComment(@PathVariable int commentId,@RequestBody Comment comment){
@@ -35,4 +35,9 @@ public class CommentController {
 //    List<Comment> deleteComment(@PathVariable int commentId){
 //        return commentService.deleteComment(commentId);
 //    }
+
+        @PostMapping("/create/{member_id}/{task_id}")
+        private Comment createComment(@RequestBody Comment comment, @PathVariable int member_id,@PathVariable int task_id){
+        return commentService.createComment(comment,member_id,task_id);
+    }
 }

@@ -21,14 +21,20 @@ public class TaskController {
 //    public Task saveTask(@RequestBody Task tasks){
 //        return taskService.addTask(tasks);
 //    }
-//    @GetMapping("/getAllTask")
-//    public List<Task> getAllTask(){
-//        return taskService.getAllTask();
-//    }
-//
-   @PostMapping("/createTask/{project_id}/{member_id}")
+    @GetMapping("/getAllTask")
+    public List<Task> getAllTask(){
+        return taskService.getAllTask();
+    }
+
+   @PostMapping("/createTable/{project_id}/{member_id}")
     public Project createTable(@PathVariable Integer project_id,@PathVariable int member_id){
         return taskService.createTable(project_id,member_id);
     }
+
+   @PostMapping("/createTask/{member_id}/{table_id}")
+    public Table createTask(@PathVariable int member_id,@PathVariable int table_id){
+        return taskService.createTask(member_id,table_id);
+    }
+
 
 }

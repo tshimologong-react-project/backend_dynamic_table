@@ -3,6 +3,7 @@ package com.algoExpert.demo.Service;
 
 import com.algoExpert.demo.Entity.Members;
 import com.algoExpert.demo.Entity.Project;
+import com.algoExpert.demo.Repository.MemberRepository;
 import com.algoExpert.demo.Repository.ProjectRepository;
 import com.algoExpert.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class MemberService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private MemberRepository memberRepository;
+
     public Project inviteMember (int project_id , int user_id){
 
         Project userproject = projectRepository.findById(project_id).get();
@@ -27,5 +31,9 @@ public class MemberService {
         userproject.setMembersList(members);
 
         return projectRepository.save(userproject);
+    }
+
+    public List<Members> getAllMembers(){
+        return memberRepository.findAll();
     }
 }

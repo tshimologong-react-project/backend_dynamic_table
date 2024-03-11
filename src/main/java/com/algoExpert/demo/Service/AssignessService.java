@@ -6,7 +6,9 @@ import com.algoExpert.demo.Entity.Task;
 import com.algoExpert.demo.Repository.MemberRepository;
 import com.algoExpert.demo.Repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AssignessService {
 
 	@Autowired
@@ -19,9 +21,6 @@ public class AssignessService {
 
 //	 Assign task to member
 	public Assignees assignTaskToMember(int member_id, int task_id){
-
-		Task task=   taskRepository.findById(task_id).get();
-		Members member=   memberRepository.findById(task_id).get();
 
 		Assignees assignee = new Assignees(0, member_id, task_id);
 

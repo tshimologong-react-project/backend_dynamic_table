@@ -1,9 +1,11 @@
 package com.algoExpert.demo.Service;
 
 import com.algoExpert.demo.Entity.Comment;
+import com.algoExpert.demo.Entity.Members;
 import com.algoExpert.demo.Entity.Task;
 import com.algoExpert.demo.Entity.User;
 import com.algoExpert.demo.Repository.CommentRepository;
+import com.algoExpert.demo.Repository.MemberRepository;
 import com.algoExpert.demo.Repository.TaskRepository;
 import com.algoExpert.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +19,17 @@ import java.util.Optional;
 
 @Service
 public class CommentService {
-//
-//    @Autowired
-//    private CommentRepository commentRepository;
-//    @Autowired
-//    private UserRepository userRepository ;
-//
-//    @Autowired
-//    private TaskRepository taskRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
+    @Autowired
+    private UserRepository userRepository ;
+
+    @Autowired
+    private TaskRepository taskRepository;
+
+    @Autowired
+    private MemberRepository memberRepository;
 //
 //    public Task createComment(int userId,Comment comment, int taskId){
 //
@@ -45,9 +50,9 @@ public class CommentService {
 //
 //    }
 //
-//    public List<Comment> getAllComments(){
-//        return commentRepository.findAll();
-//    }
+    public List<Comment> getAllComments(){
+        return commentRepository.findAll();
+    }
 //
 //    public Comment editComment(int commentId,Comment newComment){
 //        return commentRepository.findById(commentId)
@@ -64,4 +69,18 @@ public class CommentService {
 //
 //        return null;
 //    }
+
+    public Comment createComment(Comment comment,int member_id,int task_id){
+        Members findMembers = memberRepository.findById(member_id).get();
+        Task task = taskRepository.findById(task_id).get();
+        User user = userRepository.findById(findMembers.getUser_id()).get();
+        comment.setUsername(user.getUsername());
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
+        comment.setDate_created(simpleDateFormat.format(new Date()));
+        comment.setTask(task);
+
+        return commentRepository.save(comment);
+    }
+
 }
