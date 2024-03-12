@@ -15,11 +15,6 @@ public class Comment {
     @Column(length = 1000)
     private String comment;
 
-    // @ManyToOne
-    // @JsonIgnore
-    // @JoinColumn(name = "user_id")
-    // private User user;
-
     @ManyToOne
     @JsonIgnore
     private Task task;

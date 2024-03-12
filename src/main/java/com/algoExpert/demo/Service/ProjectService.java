@@ -3,7 +3,6 @@ package com.algoExpert.demo.Service;
 import com.algoExpert.demo.Entity.*;
 import com.algoExpert.demo.Repository.ProjectRepository;
 import com.algoExpert.demo.Repository.UserRepository;
-import org.hibernate.annotations.Tables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
